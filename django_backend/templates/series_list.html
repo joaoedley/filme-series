@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Séries</h2>
+<div class="grid">
+  {% for s in series %}
+  <a class="card" href="/series/{{ s.id }}/">
+    <img src="{{ s.cover_url }}" alt="{{ s.title }}" />
+    <div class="title">{{ s.title }} ({{ s.year }})</div>
+  </a>
+  {% empty %}
+  <p>Nenhuma série encontrada.</p>
+  {% endfor %}
+</div>
+{% endblock %}

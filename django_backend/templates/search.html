@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Resultados para "{{ q }}"</h2>
+
+{% if not movies and not series %}
+<p style="color:#a1a1aa">Nenhum resultado encontrado.</p>
+{% endif %}
+
+{% if movies %}
+<h3>Filmes</h3>
+<div class="grid">
+  {% for m in movies %}
+  <a class="card" href="/movies/{{ m.id }}/">
+    <img src="{{ m.cover_url }}" alt="{{ m.title }}" />
+    <div class="title">{{ m.title }} ({{ m.year }})</div>
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if series %}
+<h3 style="margin-top:22px">Séries</h3>
+<div class="grid">
+  {% for s in series %}
+  <a class="card" href="/series/{{ s.id }}/">
+    <img src="{{ s.cover_url }}" alt="{{ s.title }}" />
+    <div class="title">{{ s.title }} ({{ s.year }})</div>
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "partials/banner.html" %}
+
+<h2>Recentes</h2>
+<div class="grid">
+  {% for item in recents %}
+  <a class="card" href="{{ item.href }}">
+    <img src="{{ item.cover_url }}" alt="{{ item.title }}" />
+    <div class="title">{{ item.title }} ({{ item.year }})</div>
+  </a>
+  {% empty %}
+  <p style="color:#a1a1aa">Nada recente ainda.</p>
+  {% endfor %}
+</div>
+
+<h3 style="margin-top:22px">Filmes</h3>
+<div class="grid">
+  {% for m in movies %}
+  <a class="card" href="/movies/{{ m.id }}/">
+    <img src="{{ m.cover_url }}" alt="{{ m.title }}" />
+    <div class="title">{{ m.title }} ({{ m.year }})</div>
+  </a>
+  {% empty %}
+  <p style="color:#a1a1aa">Nenhum filme cadastrado.</p>
+  {% endfor %}
+</div>
+
+<h3 style="margin-top:22px">Séries</h3>
+<div class="grid">
+  {% for s in series %}
+  <a class="card" href="/series/{{ s.id }}/">
+    <img src="{{ s.cover_url }}" alt="{{ s.title }}" />
+    <div class="title">{{ s.title }} ({{ s.year }})</div>
+  </a>
+  {% empty %}
+  <p style="color:#a1a1aa">Nenhuma série cadastrada.</p>
+  {% endfor %}
+</div>
+{% endblock %}

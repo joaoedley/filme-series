@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="detail">
+  <img class="cover" src="{{ movie.cover_url }}" alt="{{ movie.title }}"/>
+  <div class="info">
+    <h1>{{ movie.title }} ({{ movie.year }})</h1>
+    <p>{{ movie.description }}</p>
+    <p>Categoria: {{ movie.category.name }}</p>
+    {% if movie.trailer_url %}
+    <p><a href="{{ movie.trailer_url }}" target="_blank"> Assistir trailer</a></p>
+    {% endif %}
+
+    <div class="player">
+      <video controls src="{{ initial_video_url }}"></video>
+    </div>
+  </div>
+</div>
+{% endblock %}

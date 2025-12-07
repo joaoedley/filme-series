@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="detail">
+  <img class="cover" src="{{ series.cover_url }}" alt="{{ series.title }}"/>
+  <div class="info">
+    <h1>{{ series.title }} ({{ series.year }})</h1>
+    <p>{{ series.description }}</p>
+    <p>Categoria: {{ series.category.name }}</p>
+    {% if series.trailer_url %}
+    <p><a href="{{ series.trailer_url }}" target="_blank">Assistir trailer</a></p>
+    {% endif %}
+    <form method="post" action="/users/favorite/series/{{ series.id }}/">
+      {% csrf_token %}
+      
+    </form>
+
+    <div class="player">
+      <video controls src="{{ initial_video_url }}"></video>
+    </div>
+
+    <h3 style="margin-top:16px">Episódios</h3>
+
+    {% if seasons %}
+      <div id="seasons">
+        {% for s in seasons %}
+          <div class="season-block" style="margin-bottom:12px">
+            <button class="season-toggle" data-target="#season-{{ s.season }}" style="width:100%;text-align:left;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:transparent;color:#fff;cursor:pointer;">
+              Temporada {{ s.season }}
+              <span style="float:right;opacity:.7">Mostrar</span>
+            </button>
+            <ul id="season-{{ s.season }}" class="season-episodes" style="list-style:none;padding-left:0;margin-top:8px;display:none">
+              {% for ep in s.episodes %}
+              <li data-video-src="{{ ep.video_url }}" class="episode" style="padding:8px 10px;border:1px solid rgba(255,255,255,.08);border-radius:10px;margin-bottom:8px;cursor:pointer;">
+                Ep {{ ep.number }} - {{ ep.title }}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <ul style="list-style:none;padding-left:0">
+        {% for ep in episodes %}
+          <li data-video-src="{{ ep.video_url }}" class="episode{% if forloop.first %} autoplay{% endif %}" style="padding:8px 10px;border:1px solid rgba(255,255,255,.08);border-radius:10px;margin-bottom:8px;cursor:pointer;">
+            Ep {{ ep.number }} - {{ ep.title }}
+          </li>
+        {% empty %}
+          <li style="color:#a1a1aa">Nenhum episódio cadastrado ainda.</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+<script src="{% static 'js/player.js' %}"></script>
+<script>
+  // Toggle seasons open/close
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.season-toggle');
+    if(!btn) return;
+    const target = document.querySelector(btn.getAttribute('data-target'));
+    if(!target) return;
+    const visible = target.style.display !== 'none';
+    target.style.display = visible ? 'none' : 'block';
+    const span = btn.querySelector('span');
+    if(span) span.textContent = visible ? 'Mostrar' : 'Ocultar';
+  });
+</script>
+{% endblock %}

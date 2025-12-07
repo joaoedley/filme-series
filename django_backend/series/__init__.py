@@ -1,0 +1,1 @@
+"""Series app package initializer."""

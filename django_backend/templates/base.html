@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  {% include "partials/head.html" %} 
+  <link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+  <header>
+    <a href="/" class="brand">CineBR</a>
+    <nav>
+      <a href="/movies/">Filmes</a>
+      <a href="/series/">Séries</a>
+      <form action="/search/" method="get">
+        <input name="q" placeholder="Buscar..." />
+      </form>
+      {% if request.user.is_authenticated %}
+        
+      {% else %}
+        <a href="/users/login/">Entrar</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Filmes</h2>
+<div class="grid">
+  {% for m in movies %}
+  <a class="card" href="/movies/{{ m.id }}/">
+    <img src="{{ m.cover_url }}" alt="{{ m.title }}" />
+    <div class="title">{{ m.title }} ({{ m.year }})</div>
+  </a>
+  {% empty %}
+  <p>Nenhum filme encontrado.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="glass" style="max-width:420px;margin:40px auto;padding:24px;border:1px solid rgba(255,255,255,.08);border-radius:12px;">
+  <h2 style="margin-top:0">Criar conta</h2>
+  <form method="post" action="{% url 'users:register' %}">
+    {% csrf_token %}
+    <label style="display:block;margin-bottom:10px;">Usuário
+      <input name="username" required style="width:100%;margin-top:6px;background:#0d111a;color:#e5e7eb;border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:10px;">
+    </label>
+    <label style="display:block;margin-bottom:10px;">Email
+      <input name="email" type="email" required style="width:100%;margin-top:6px;background:#0d111a;color:#e5e7eb;border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:10px;">
+    </label>
+    <label style="display:block;margin-bottom:16px;">Senha
+      <input name="password" type="password" required style="width:100%;margin-top:6px;background:#0d111a;color:#e5e7eb;border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:10px;">
+    </label>
+    <button class="btn-primary" style="padding:10px 14px;border-radius:10px;border:none;background:#7c3aed;color:white;cursor:pointer;">Cadastrar</button>
+  </form>
+  <p style="margin-top:12px;color:#a1a1aa;">Já tem conta? <a href="{% url 'users:login' %}">Entrar</a></p>
+  {% if messages %}
+    <ul style="margin-top:12px;color:#fda4af;">
+      {% for m in messages %}<li>{{ m }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}

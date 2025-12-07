@@ -1,0 +1,45 @@
+/* Main site styles */
+:root{
+    --bg:#0b0e14; --text:#e5e7eb; --muted:#a1a1aa; --primary:#7c3aed; --card:#11151f; --border:1px solid rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  
+  /* Header */
+  header{position:sticky;top:0;z-index:10;display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px 22px;background:rgba(17,21,31,.7);backdrop-filter:blur(8px);border-bottom:var(--border)}
+  .brand{font-weight:700;letter-spacing:.5px}
+  nav{display:flex;align-items:center;gap:14px}
+  nav a{padding:8px 10px;border-radius:10px;transition:.2s}
+  nav a:hover{background:rgba(255,255,255,.06)}
+  nav form{display:flex}
+  nav input{background:#0d111a;color:var(--text);border:var(--border);padding:8px 10px;border-radius:10px;outline:none}
+  
+  /* Grid of cards */
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .card{background:var(--card);border:var(--border);border-radius:12px;overflow:hidden;transition:.2s}
+  .card:hover{transform:translateY(-3px)}
+  .card .title{padding:10px 12px;color:var(--muted);font-size:.9rem}
+  .card img{aspect-ratio:2/3;object-fit:cover}
+  
+  /* Sections */
+  h2{margin:22px 0 12px 0;font-size:1.2rem;color:#fff}
+  main{padding:16px 22px 40px}
+  
+  /* Detail page */
+  .detail{display:grid;grid-template-columns:280px 1fr;gap:24px}
+  .cover{width:100%;border-radius:12px;border:var(--border)}
+  .info h1{margin:0 0 8px 0}
+  .info p{color:var(--muted)}
+  .info button{background:var(--primary);color:white;border:none;padding:10px 14px;border-radius:10px;cursor:pointer}
+  .info a{color:#93c5fd}
+  
+  /* Player */
+  .player{margin-top:16px;background:#0d111a;border:var(--border);border-radius:12px;padding:12px}
+  .player video{width:100%;height:auto;border-radius:8px;background:#000}
+  
+  /* Responsive */
+  @media (max-width:1200px){.grid{grid-template-columns:repeat(4,1fr)}}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}.detail{grid-template-columns:1fr}}
+  @media (max-width:600px){.grid{grid-template-columns:repeat(2,1fr)}}
